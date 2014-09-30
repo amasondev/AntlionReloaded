@@ -43,14 +43,19 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-		// Face the mouse position
-		//rigidbody2D.AddTorque(Vector2.Angle(transform.up, targetLocation - transform.position), ForceMode2D.Impulse);
-
 		// Move towards the target location
 		if (Vector3.Distance(targetLocation, transform.position) > deadZone)
 		{
+			// Face the mouse position
+			Quaternion newRot = Quaternion.LookRotation(transform.forward, targetLocation - transform.position);
+			transform.rotation = newRot;
+
 			Vector3 moveVector = Vector3.ClampMagnitude((targetLocation - transform.position) * vectorFactor, movement.speed);
 			rigidbody2D.velocity = moveVector;
+		}
+		else
+		{
+			rigidbody2D.velocity *= (1f / movement.friction) * Time.fixedDeltaTime;
 		}
 	}
 }
@@ -59,4 +64,5 @@ public class PlayerController : MonoBehaviour
 public class Movement
 {
 	public float speed = 4f;
+	public float friction = 2f;
 }
