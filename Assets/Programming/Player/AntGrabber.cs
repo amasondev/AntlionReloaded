@@ -39,11 +39,14 @@ public class AntGrabber : MonoBehaviour
     void Grab()
     {
         Debug.Log("Grab!");
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, p.targetLocation - transform.position, distance);
-        if (hit && hit.collider.rigidbody2D)
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, p.targetLocation - transform.position, distance);
+        foreach (RaycastHit2D hit in hits)
         {
-            Debug.Log("Grabbed " + hit.collider.gameObject);
-            grabbed = hit.collider.rigidbody2D;
+            if (hit && hit.collider.rigidbody2D)
+            {
+                Debug.Log("Grabbed " + hit.collider.gameObject);
+                grabbed = hit.collider.rigidbody2D;
+            }
         }
     }
 }
