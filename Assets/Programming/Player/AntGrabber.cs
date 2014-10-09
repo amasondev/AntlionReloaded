@@ -48,7 +48,7 @@ public class AntGrabber : MonoBehaviour
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, p.targetLocation - transform.position, distance);
         foreach (RaycastHit2D hit in hits)
         {
-            if (hit && hit.collider.rigidbody2D)
+            if (hit && hit.collider.rigidbody2D && hit.collider.GetComponent<ObjectiveAnt>())
             {
                 grabbed = hit.collider.rigidbody2D;
             }

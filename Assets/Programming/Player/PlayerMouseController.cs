@@ -19,6 +19,9 @@ public class PlayerMouseController : PlayerController
 	// Update is called once per frame
 	void FixedUpdate()
 	{
+		if (dead)
+			return;
+
 		// Move towards the target location
 		if (Vector3.Distance(targetLocation, transform.position) > deadZone)
 		{

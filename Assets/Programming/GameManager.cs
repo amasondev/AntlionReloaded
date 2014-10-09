@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		UpdateAntCount();
+		InvokeRepeating("UpdateAntCount", 0, 1f);
 	}
 	
 	// Update is called once per frame
@@ -34,8 +34,9 @@ public class GameManager : MonoBehaviour
 
 	public void WinLevel()
 	{
-		int l = Application.loadedLevel;
-		l++;
+		Debug.Log("Completed level!");
+		int l = (int)Mathf.Repeat(Application.loadedLevel + 1, Application.levelCount);
+		Debug.Log("Loading level " + l.ToString());
 		Application.LoadLevel(l);
 	}
 }

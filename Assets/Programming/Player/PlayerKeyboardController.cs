@@ -11,8 +11,11 @@ public class PlayerKeyboardController : PlayerController
     {
         GetInput();
         // Face the mouse position
-        FaceTarget();
-        Movement(Time.fixedDeltaTime);
+		if (!dead)
+		{
+			FaceTarget();
+			Movement(Time.fixedDeltaTime);
+		}
     }
 
     void Movement (float time)
