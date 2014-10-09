@@ -3,18 +3,37 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
+	[Range(0, 200)]
+	public float time = 100f;
+	private float timeRemaining;
+
 	private int numObjectiveAnts = 1;
 
 	// Use this for initialization
 	void Start()
 	{
+		timeRemaining = time;
 		InvokeRepeating("UpdateAntCount", 0, 1f);
 	}
 	
 	// Update is called once per frame
 	void Update()
 	{
-	
+		timeRemaining -= Time.deltaTime;
+		UpdateText();
+
+		if (timeRemaining <= 0)
+		{
+			Application.LoadLevel(Application.loadedLevel);
+		}
+	}
+
+	void UpdateText()
+	{
+		if (GetComponent<GUIText>())
+		{
+			GetComponent<GUIText>().text = Mathf.FloorToInt(timeRemaining).ToString();
+		}
 	}
 
 	public void ResetGame()
