@@ -25,16 +25,23 @@ public class AntGrabber : MonoBehaviour
 
         if (!Input.GetButton("Fire1") && grabbed)
         {
+			Physics2D.IgnoreCollision(grabbed.collider2D, this.collider2D, false);
             grabbed.velocity = ((Vector2)p.targetLocation - prevGrabbedPos)* throwStrength;
             grabbed = null;
         }
-
-        if (grabbed)
-        {
-            prevGrabbedPos = p.targetLocation;
-            grabbed.MovePosition(transform.position + (p.targetLocation - transform.position).normalized * distance);
-        }
     }
+
+	void FixedUpdate()
+	{
+		if (grabbed)
+		{
+			Physics2D.IgnoreCollision(grabbed.collider2D, this.collider2D);
+			prevGrabbedPos = p.targetLocation;
+			Vector2 newPos = transform.position + Vector3.ClampMagnitude(p.targetLocation - transform.position, distance);
+
+			grabbed.MovePosition(newPos);
+		}
+	}
 
     void Grab()
     {

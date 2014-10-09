@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public bool followMouse = true;
     // Reference to camera in the scene
     public Camera cam;
+	// Reference to the animator
+	public Animator anim;
 
     // Location to move to
     [System.NonSerialized]
@@ -19,6 +21,11 @@ public class PlayerController : MonoBehaviour
 	// Use this for initialization
 	protected void Start()
 	{
+		if (!anim)
+		{
+			anim = GetComponentInChildren<Animator>();
+		}
+
         if (!cam)
         {
             cam = Camera.main;

@@ -20,6 +20,8 @@ public class PlayerKeyboardController : PlayerController
         Vector2 vel = inputMovement * movement.speed;
         vel = Vector2.ClampMagnitude(vel, movement.speed);
         rigidbody2D.velocity = vel;
+
+		anim.SetFloat ("MovementSpeed", vel.magnitude);
     }
 
     void GetInput()
