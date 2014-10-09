@@ -26,6 +26,11 @@ public class GameManager : MonoBehaviour
 		{
 			Application.LoadLevel(Application.loadedLevel);
 		}
+
+		if (Input.GetKey(KeyCode.Escape))
+	    {
+			Application.Quit();
+		}
 	}
 
 	void UpdateText()

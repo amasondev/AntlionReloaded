@@ -11,6 +11,14 @@ public class StartButton : MonoBehaviour
 		if (!anim) anim = GetComponent<Animator>();
 	}
 
+	void Update()
+	{
+		if (Input.GetKey(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
+	}
+
 	void OnMouseOver()
 	{
 		anim.SetBool("MouseOver", true);
